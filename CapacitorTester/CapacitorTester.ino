@@ -1,3 +1,5 @@
+ //for some reason, this circuit tests if you are touching it!
+ 
  const int interface = 15;
 
 void setup() {
@@ -7,14 +9,16 @@ void setup() {
 void loop() {
   pinMode(interface, OUTPUT);
   digitalWrite(interface, HIGH);
-  delay(500);
+  delay(50);
   pinMode(interface, INPUT);
-  int sensorValues[5] = {};
-  for ( int i = 0; i < 500; i++) {
+  int sensorValues[50] = {};
+  int sum = 0;
+  for ( int i = 0; i < 50; i++) {
     int sensorValue = analogRead(interface);
-    Serial.print(sensorValue);
-    Serial.print(", ");
+    sensorValues[i] = sensorValue;
+    sum += sensorValue;
     delay(1);
   }
-  Serial.println();
+  values
+  Serial.println(sum);
 }
