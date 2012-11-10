@@ -1,4 +1,7 @@
 #include "pins_arduino.h" // Arduino pre-1.0 needs this
+const int numsensors = 5;
+int sensorpins[] = {
+  3, 4, 5, 6, 7};
 
 void setup()
 {
@@ -6,7 +9,13 @@ void setup()
 }
 
 void loop(){
-Serial.println(readCapacitivePin(3));
+  int answers[] = {42, 43, 44, 45, 46};
+  for (int i = 0; i < numsensors; i++) {
+    answers[i] = readCapacitivePin(sensorpins[i]);
+    Serial.print(answers[i]);
+    }
+  Serial.println();
+  delay(1);
 }
 
 
@@ -35,23 +44,57 @@ uint8_t readCapacitivePin(int pinToMeasure) {
   // decreases the number of hardware cycles between each read of the pin,
   // thus increasing sensitivity.
   uint8_t cycles = 17;
-       if (*pin & bitmask) { cycles =  0;}
-  else if (*pin & bitmask) { cycles =  1;}
-  else if (*pin & bitmask) { cycles =  2;}
-  else if (*pin & bitmask) { cycles =  3;}
-  else if (*pin & bitmask) { cycles =  4;}
-  else if (*pin & bitmask) { cycles =  5;}
-  else if (*pin & bitmask) { cycles =  6;}
-  else if (*pin & bitmask) { cycles =  7;}
-  else if (*pin & bitmask) { cycles =  8;}
-  else if (*pin & bitmask) { cycles =  9;}
-  else if (*pin & bitmask) { cycles = 10;}
-  else if (*pin & bitmask) { cycles = 11;}
-  else if (*pin & bitmask) { cycles = 12;}
-  else if (*pin & bitmask) { cycles = 13;}
-  else if (*pin & bitmask) { cycles = 14;}
-  else if (*pin & bitmask) { cycles = 15;}
-  else if (*pin & bitmask) { cycles = 16;}
+  if (*pin & bitmask) { 
+    cycles =  0;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  1;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  2;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  3;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  4;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  5;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  6;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  7;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  8;
+  }
+  else if (*pin & bitmask) { 
+    cycles =  9;
+  }
+  else if (*pin & bitmask) { 
+    cycles = 10;
+  }
+  else if (*pin & bitmask) { 
+    cycles = 11;
+  }
+  else if (*pin & bitmask) { 
+    cycles = 12;
+  }
+  else if (*pin & bitmask) { 
+    cycles = 13;
+  }
+  else if (*pin & bitmask) { 
+    cycles = 14;
+  }
+  else if (*pin & bitmask) { 
+    cycles = 15;
+  }
+  else if (*pin & bitmask) { 
+    cycles = 16;
+  }
 
   // Discharge the pin again by setting it low and output
   //  It's important to leave the pins low if you want to 
@@ -64,3 +107,4 @@ uint8_t readCapacitivePin(int pinToMeasure) {
 
   return cycles;
 }
+
