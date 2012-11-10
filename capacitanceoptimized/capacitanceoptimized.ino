@@ -1,7 +1,11 @@
 #include "pins_arduino.h" // Arduino pre-1.0 needs this
+#include "pitches.h"
+#include "math.h"
 const int numsensors = 5;
+const int threshold = 9;
 int sensorpins[] = {
-  3, 4, 5, 6, 7};
+  4, 5, 6, 7, 8};
+const int speakerPin = 12;
 
 void setup()
 {
@@ -9,13 +13,36 @@ void setup()
 }
 
 void loop(){
-  int answers[] = {42, 43, 44, 45, 46};
+  int answers[] = {0, 0, 0, 0, 0};
+  int bools[] = {0, 0, 0, 0, 0};
   for (int i = 0; i < numsensors; i++) {
     answers[i] = readCapacitivePin(sensorpins[i]);
+    if (answers[i] > threshold) {
+      bools[i] = 1; 
+    }
     Serial.print(answers[i]);
+    Serial.print(", ");
     }
   Serial.println();
-  delay(1);
+  playmusic(bools);
+  delay(5);
+}
+
+void playmusic(int* bools) {
+  int notecode = 0;
+  for (int i = 0; i < numsensors; i++) {
+    notecode += bools[i]*pow(2, i);
+  }
+  switch(notecode)
+  {
+    case 0:
+    case 1:
+      tone(speakerPin, NOTE_C4);
+    case 2:
+      tone(speakerPin, NOTE_D4);
+    case 3:
+      tone(speakerPin, NOTE_E4);
+  }
 }
 
 
